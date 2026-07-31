@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사이트 소개 | 실수령액 계산기</title>
+<meta name="description" content="실수령액 계산기가 어떤 자료를 근거로 계산하는지, 요율은 어떻게 갱신되는지 소개합니다.">
+<link rel="canonical" href="https://zooline88.github.io/salary/about/">
+<meta name="theme-color" content="#1a6fe8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css?v=20260731">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../">실수령액<span>계산기</span></a>
+    <nav class="site-nav">
+      <a href="../">실수령액</a>
+      <a href="../annual-salary/">연봉</a>
+      <a href="../four-insurance/">4대보험</a>
+      <a href="../severance-pay/">퇴직금</a>
+      <a href="../salary-table/">실수령액표</a>
+      <a href="../guide/">가이드</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="prose">
+    <h1>사이트 소개</h1>
+    <p class="lead">
+      복잡한 급여 계산을 누구나 1초 만에 확인할 수 있게 만드는 것이 목표입니다.
+    </p>
+
+    <h2>무엇을 하는 사이트인가요?</h2>
+    <p>
+      연봉이나 월급을 넣으면 4대보험료와 세금을 뺀 <b>실제 수령 금액</b>을 계산해 주는 도구 모음입니다.
+      실수령액 계산기, 연봉 실수령액 계산기, 4대보험 계산기, 퇴직금 계산기, 연봉 실수령액표를 제공합니다.
+      회원가입이 없고 전부 무료입니다.
+    </p>
+
+    <h2>계산 근거</h2>
+    <ul>
+      <li><b>소득세</b> — 소득세법 시행령 [별표 2] 근로소득 간이세액표(2026. 2. 27. 개정)의
+        <b>원본 데이터 전체</b>를 그대로 넣어 조회합니다. 근사식이 아닙니다.
+        월급여 1,000만원 초과 구간은 같은 별표에 고시된 산식을 적용합니다.</li>
+      <li><b>4대보험료</b> — 2026년 국민연금(9.5%)·건강보험(7.19%)·장기요양보험(건강보험료의 13.14%)·
+        고용보험(실업급여 0.9%) 요율을 적용합니다.
+        국민연금 기준소득월액 상·하한액은 보건복지부 고시(2026년 7월~2027년 6월: 상한 659만원 / 하한 41만원)를 따릅니다.</li>
+      <li><b>퇴직금</b> — 근로기준법 제2조의 평균임금 정의와
+        근로자퇴직급여보장법의 법정 퇴직금 산식을 적용합니다.</li>
+    </ul>
+
+    <h2>요율은 어떻게 갱신하나요?</h2>
+    <p>
+      요율과 상·하한액은 코드가 아니라 <b>별도의 설정 파일</b>로 분리해 두었습니다.
+      개정이 있을 때 해당 파일만 갱신하면 모든 계산기에 동시에 반영됩니다.
+      갱신 주기는 다음과 같습니다.
+    </p>
+    <div class="scroll-x">
+      <table class="data">
+        <thead><tr><th>항목</th><th>보통 바뀌는 시점</th></tr></thead>
+        <tbody>
+          <tr><td>국민연금 기준소득월액 상·하한액</td><td>매년 7월</td></tr>
+          <tr><td>건강보험·장기요양보험 요율</td><td>매년 1월</td></tr>
+          <tr><td>근로소득 간이세액표</td><td>세법 개정 시 (최근 2026년 2월)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>현재 적용 중인 요율 기준: <b class="js-rate-stamp"></b></p>
+
+    <h2>정확성에 대하여</h2>
+    <p>
+      계산 결과는 <b>참고용</b>입니다. 비과세 항목의 종류와 금액, 부양가족의 소득 요건,
+      중도 입·퇴사, 상여금 지급 시기, 건강보험 정산분 등 개인 사정에 따라
+      실제 명세서와 차이가 날 수 있습니다.
+      매달 떼는 소득세는 어디까지나 미리 걷는 개산액이며, 최종 세액은 <b>연말정산</b>에서 확정됩니다.
+    </p>
+    <p>
+      계산이 이상하거나 요율이 오래됐다면 알려주세요.
+      이메일: <b>zooline88@gmail.com</b>
+    </p>
+
+    <h2>공식 자료 바로가기</h2>
+    <ul>
+      <li><a href="https://www.nts.go.kr/" target="_blank" rel="noopener">국세청</a> — 근로소득 간이세액표, 원천세</li>
+      <li><a href="https://www.hometax.go.kr/" target="_blank" rel="noopener">홈택스</a> — 간이세액표 조회, 퇴직소득 세액계산</li>
+      <li><a href="https://www.nps.or.kr/" target="_blank" rel="noopener">국민연금공단</a> — 기준소득월액 상·하한액</li>
+      <li><a href="https://www.nhis.or.kr/" target="_blank" rel="noopener">국민건강보험공단</a> — 건강보험·장기요양보험료</li>
+      <li><a href="https://www.moel.go.kr/" target="_blank" rel="noopener">고용노동부</a> — 퇴직금, 고용보험</li>
+    </ul>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <nav>
+      <a href="../">실수령액 계산기</a>
+      <a href="../annual-salary/">연봉 실수령액</a>
+      <a href="../four-insurance/">4대보험</a>
+      <a href="../severance-pay/">퇴직금</a>
+      <a href="../salary-table/">실수령액표</a>
+      <a href="../guide/">가이드</a>
+      <a href="./">사이트 소개</a>
+      <a href="../privacy/">개인정보처리방침</a>
+      <a href="../terms/">이용약관</a>
+    </nav>
+    <p class="rate-stamp">© <span class="js-year"></span> 실수령액 계산기.</p>
+  </div>
+</footer>
+
+<script src="../assets/js/rates.js?v=20260731"></script>
+<script src="../assets/data/withholding-2026.js?v=20260731"></script>
+<script src="../assets/js/calc.js?v=20260731"></script>
+<script src="../assets/js/ui.js?v=20260731"></script>
+</body>
+</html>

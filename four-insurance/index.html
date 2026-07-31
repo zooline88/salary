@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4대보험 계산기 2026 | 근로자·사업주 부담액 계산</title>
+<meta name="description" content="2026년 4대보험 요율로 국민연금·건강보험·장기요양보험·고용보험료를 계산합니다. 근로자 부담액과 사업주 부담액을 각각 보여주고 기업 규모별 고용보험 요율도 반영합니다.">
+<link rel="canonical" href="https://zooline88.github.io/salary/four-insurance/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="4대보험 계산기 2026">
+<meta property="og:description" content="근로자·사업주 부담 4대보험료를 항목별로 계산합니다.">
+<meta property="og:url" content="https://zooline88.github.io/salary/four-insurance/">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#1a6fe8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css?v=20260731">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5521043113375613" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../">실수령액<span>계산기</span></a>
+    <nav class="site-nav">
+      <a href="../">실수령액</a>
+      <a href="../annual-salary/">연봉</a>
+      <a href="./" aria-current="page">4대보험</a>
+      <a href="../severance-pay/">퇴직금</a>
+      <a href="../salary-table/">실수령액표</a>
+      <a href="../guide/">가이드</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>4대보험 계산기</h1>
+  <p class="lead">
+    보수월액(과세대상 급여)을 넣으면 국민연금·건강보험·장기요양보험·고용보험료를
+    근로자 부담분과 사업주 부담분으로 나눠 계산합니다. <span class="js-rate-stamp"></span>.
+  </p>
+
+  <section class="card">
+    <div class="field">
+      <label for="pay">보수월액 (과세대상 월 급여)
+        <span class="hint">세전 월급에서 식대 등 비과세액을 뺀 금액입니다.</span></label>
+      <div class="money-input">
+        <input type="text" id="pay" inputmode="numeric" autocomplete="off" placeholder="0">
+        <span class="unit">원</span>
+      </div>
+      <div class="quick" id="quickBtns"></div>
+    </div>
+    <div class="field">
+      <label for="size">기업 규모 <span class="hint">사업주의 고용안정·직업능력개발사업 요율에만 영향을 줍니다.</span></label>
+      <select id="size"></select>
+    </div>
+  </section>
+
+  <section>
+    <div class="result-hero">
+      <div class="cap">근로자가 매달 내는 4대보험료</div>
+      <div class="big" id="empTotal">0원</div>
+      <div class="sub" id="empSub">보수월액의 0%</div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">항목별 보험료</h2>
+      <div class="scroll-x">
+        <table class="data" id="insTable">
+          <thead>
+            <tr><th>항목</th><th>요율(근로자)</th><th class="num">근로자</th><th class="num">사업주</th><th class="num">합계</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="shareBtn" type="button">결과 주소 복사</button>
+        <a class="btn" href="../">실수령액까지 계산하기</a>
+      </div>
+      <p class="disclaimer" id="shareMsg" aria-live="polite"></p>
+      <div class="note" id="calcNote"></div>
+    </div>
+  </section>
+
+  <div class="ad-slot">
+    <!-- 애드센스 광고 단위 코드를 이 자리에 붙여넣으세요 -->
+  </div>
+
+  <section class="prose">
+    <h2>4대보험, 누가 얼마씩 내나요?</h2>
+    <p>
+      4대보험은 국민연금·건강보험(+장기요양)·고용보험·산재보험을 말합니다.
+      이 중 <b>국민연금과 건강보험(장기요양 포함)은 근로자와 회사가 정확히 반씩</b> 부담합니다.
+      고용보험은 실업급여분(0.9%)만 반씩 내고, 회사는 여기에 고용안정·직업능력개발사업 요율
+      (0.25%~0.85%, 기업 규모에 따라 다름)을 <b>추가로</b> 부담합니다.
+      산재보험은 <b>회사가 100% 부담</b>하므로 근로자 급여에서는 한 푼도 빠지지 않습니다.
+    </p>
+
+    <h2>보수월액이란?</h2>
+    <p>
+      보험료를 계산하는 기준 금액입니다. 회사가 주는 총급여에서 <b>비과세 소득을 뺀 금액</b>으로,
+      급여명세서의 "과세 대상" 금액과 같습니다. 대표적인 비과세는 <b>월 20만원 한도의 식대</b>이고,
+      본인 차량을 업무에 쓰는 경우의 자기차량운전보조금(월 20만원), 6세 이하 자녀 육아수당(월 20만원) 등도
+      비과세입니다. 비과세액이 클수록 보험료와 세금이 모두 줄어듭니다.
+    </p>
+
+    <h2>국민연금만 상한액·하한액이 있습니다</h2>
+    <p>
+      국민연금은 보수월액이 아무리 높아도 <b>기준소득월액 상한액(2026년 7월 기준 659만원)</b>까지만 계산하고,
+      아무리 낮아도 <b>하한액 41만원</b>으로 계산합니다. 이 금액은 전체 가입자의 평균소득 변동에 따라
+      <b>매년 7월에 조정</b>됩니다. 건강보험·고용보험에는 이런 상한이 사실상 적용되지 않아
+      급여에 비례해 계속 늘어납니다.
+    </p>
+
+    <h2>장기요양보험료 계산이 헷갈리는 이유</h2>
+    <p>
+      장기요양보험료는 급여에 직접 요율을 곱하는 게 아니라 <b>이미 계산된 건강보험료에</b>
+      13.14%를 곱합니다. 소득 대비로 환산하면 약 0.9448%인데,
+      이 수치를 급여에 바로 곱해도 비슷한 값이 나오지만 원 단위 절사 처리 때문에
+      실제 고지 금액과 몇십 원 차이가 날 수 있습니다.
+      이 계산기는 공식 방식(건강보험료 × 13.14%)을 씁니다.
+    </p>
+  </section>
+
+  <div class="ad-slot">
+    <!-- 애드센스 광고 단위 코드를 이 자리에 붙여넣으세요 -->
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <nav>
+      <a href="../">실수령액 계산기</a>
+      <a href="../annual-salary/">연봉 실수령액</a>
+      <a href="./">4대보험</a>
+      <a href="../severance-pay/">퇴직금</a>
+      <a href="../salary-table/">실수령액표</a>
+      <a href="../guide/">가이드</a>
+      <a href="../about/">사이트 소개</a>
+      <a href="../privacy/">개인정보처리방침</a>
+      <a href="../terms/">이용약관</a>
+    </nav>
+    <p class="rate-stamp">적용 요율: <span class="js-rate-stamp"></span></p>
+    <p class="rate-stamp">© <span class="js-year"></span> 실수령액 계산기. 계산 결과는 참고용입니다.</p>
+  </div>
+</footer>
+
+<script src="../assets/js/rates.js?v=20260731"></script>
+<script src="../assets/data/withholding-2026.js?v=20260731"></script>
+<script src="../assets/js/calc.js?v=20260731"></script>
+<script src="../assets/js/ui.js?v=20260731"></script>
+<script>
+(function () {
+  var $ = UI.$;
+  var payEl = $('#pay'), sizeEl = $('#size');
+  var period = Calc.currentPeriod();
+
+  period.employmentInsurance.employerStabilityRates.forEach(function (s, i) {
+    sizeEl.insertAdjacentHTML('beforeend', '<option value="' + i + '">' + s.label + '</option>');
+  });
+
+  $('#quickBtns').innerHTML = [2000000, 2500000, 3000000, 4000000, 5000000, 7000000]
+    .map(function (v) { return '<button type="button" data-v="' + v + '">' + (v / 10000) + '만원</button>'; }).join('');
+  $('#quickBtns').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-v]');
+    if (!b) return;
+    payEl.value = Number(b.dataset.v).toLocaleString('ko-KR');
+    update();
+  });
+
+  function update() {
+    var r = Calc.fourInsurance({
+      monthlyPay: Calc.parseWon(payEl.value),
+      companySize: Number(sizeEl.value)
+    });
+    var W = Calc.won;
+
+    $('#empTotal').textContent = W(r.employee.total) + '원';
+    $('#empSub').textContent = r.monthlyPay > 0
+      ? '보수월액의 ' + (r.employee.total / r.monthlyPay * 100).toFixed(2) + '%'
+      : '보수월액을 입력하세요';
+
+    var er = r.employer, ee = r.employee;
+    var rows = [
+      ['국민연금', '4.75%', ee.pension, er.pension],
+      ['건강보험', '3.595%', ee.health, er.health],
+      ['장기요양보험', '건강보험료의 13.14%', ee.care, er.care],
+      ['고용보험', '0.9%', ee.employment, er.employment],
+      ['산재보험', '없음', 0, null]
+    ];
+    var html = '';
+    rows.forEach(function (x) {
+      html += '<tr><td>' + x[0] + '</td><td>' + x[1] + '</td>' +
+        '<td class="num">' + W(x[2]) + '</td>' +
+        '<td class="num">' + (x[3] === null ? '업종별' : W(x[3])) + '</td>' +
+        '<td class="num">' + (x[3] === null ? '-' : W(x[2] + x[3])) + '</td></tr>';
+    });
+    html += '<tr style="font-weight:800"><td>합계</td><td></td>' +
+      '<td class="num">' + W(ee.total) + '</td><td class="num">' + W(er.total) + '</td>' +
+      '<td class="num">' + W(r.grandTotal) + '</td></tr>';
+    $('#insTable').querySelector('tbody').innerHTML = html;
+
+    var notes = [];
+    notes.push('사업주 고용보험은 실업급여 0.9% + 고용안정·직업능력개발사업 ' +
+      (er.stabilityRate * 100).toFixed(2) + '% (' + er.stabilityLabel + ') = ' +
+      ((0.009 + er.stabilityRate) * 100).toFixed(2) + '% 입니다.');
+    notes.push('산재보험료는 업종별 요율(0.7%~18%대)이 달라 이 계산기에서는 제외했습니다. 전액 사업주 부담이라 근로자 실수령액에는 영향이 없습니다.');
+    if (ee.pensionCapped) notes.push('보수월액이 국민연금 상한액(659만원)을 넘어 상한액 기준으로 계산했습니다.');
+    if (ee.pensionFloored) notes.push('보수월액이 국민연금 하한액(41만원)보다 적어 하한액 기준으로 계산했습니다.');
+    $('#calcNote').innerHTML = notes.map(function (n) { return '· ' + n; }).join('<br>');
+
+    UI.writeQuery({ p: Calc.parseWon(payEl.value) || '', s: sizeEl.value !== '0' ? sizeEl.value : '' });
+  }
+
+  UI.attachMoneyInput(payEl, UI.debounce(update, 250));
+  sizeEl.addEventListener('change', update);
+  UI.attachShare($('#shareBtn'), $('#shareMsg'));
+
+  var q = UI.readQuery();
+  payEl.value = Number(q.p || 3000000).toLocaleString('ko-KR');
+  if (q.s) sizeEl.value = q.s;
+  update();
+})();
+</script>
+</body>
+</html>

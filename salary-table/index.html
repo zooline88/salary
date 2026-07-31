@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 연봉 실수령액표 | 연봉별 월 실수령액 한눈에</title>
+<meta name="description" content="연봉 2,000만원부터 1억 2,000만원까지 구간별 월 실수령액과 공제액을 정리한 2026년 연봉 실수령액표입니다. 부양가족 수를 바꿔가며 바로 확인할 수 있습니다.">
+<link rel="canonical" href="https://zooline88.github.io/salary/salary-table/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2026 연봉 실수령액표">
+<meta property="og:description" content="연봉 구간별 월 실수령액을 한 표로 정리했습니다.">
+<meta property="og:url" content="https://zooline88.github.io/salary/salary-table/">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#1a6fe8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css?v=20260731">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5521043113375613" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../">실수령액<span>계산기</span></a>
+    <nav class="site-nav">
+      <a href="../">실수령액</a>
+      <a href="../annual-salary/">연봉</a>
+      <a href="../four-insurance/">4대보험</a>
+      <a href="../severance-pay/">퇴직금</a>
+      <a href="./" aria-current="page">실수령액표</a>
+      <a href="../guide/">가이드</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1><span class="js-year"></span> 연봉 실수령액표</h1>
+  <p class="lead">
+    연봉 구간별 월 실수령액을 정리했습니다. <span class="js-rate-stamp"></span> 요율과
+    국세청 근로소득 간이세액표를 그대로 적용했습니다.
+  </p>
+
+  <section class="card">
+    <div class="grid2">
+      <div class="field">
+        <label for="family">부양가족 수 <span class="hint">본인 포함</span></label>
+        <select id="family"></select>
+      </div>
+      <div class="field">
+        <label for="step">표시 간격</label>
+        <select id="step">
+          <option value="1000000">100만원</option>
+          <option value="2000000" selected>200만원</option>
+          <option value="5000000">500만원</option>
+        </select>
+      </div>
+    </div>
+    <p class="hint">비과세액은 식대 월 20만원, 8~20세 자녀는 없는 것으로 계산했습니다. 개인 조건은 <a href="../">실수령액 계산기</a>에서 넣어보세요.</p>
+  </section>
+
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="scroll-x">
+      <table class="data" id="tbl">
+        <thead>
+          <tr>
+            <th>연봉</th>
+            <th class="num">월 세전</th>
+            <th class="num">4대보험</th>
+            <th class="num">소득세+지방세</th>
+            <th class="num">공제 합계</th>
+            <th class="num">월 실수령액</th>
+            <th class="num">연 실수령액</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ad-slot">
+    <!-- 애드센스 광고 단위 코드를 이 자리에 붙여넣으세요 -->
+  </div>
+
+  <section class="prose">
+    <h2>이 표를 보는 방법</h2>
+    <p>
+      표의 금액은 <b>퇴직금 별도(연봉 ÷ 12)</b>, <b>비과세 식대 월 20만원</b>,
+      <b>8~20세 자녀 없음</b>을 기준으로 한 값입니다.
+      실제 급여명세서와 차이가 난다면 대부분 비과세액이나 부양가족 수가 달라서입니다.
+      부양가족 수를 바꾸면 표가 즉시 다시 계산됩니다.
+    </p>
+    <p>
+      연봉이 올라갈수록 공제율도 함께 올라갑니다. 소득세가 누진세율 구조이기 때문입니다.
+      다만 국민연금은 월 보수 <b>659만원</b>(연봉 약 8,100만원 수준)에서 보험료가 고정되므로,
+      그 위 구간부터는 4대보험 부담이 더 늘지 않고 소득세만 늘어납니다.
+    </p>
+
+    <h2>연봉 협상할 때 참고할 점</h2>
+    <ul>
+      <li><b>비과세 항목을 늘리면 실수령액이 늘어납니다.</b> 같은 연봉이라도 식대 20만원이
+        비과세로 처리되면 4대보험료와 소득세가 모두 줄어듭니다.</li>
+      <li><b>퇴직금 포함 여부를 반드시 확인하세요.</b> 같은 연봉이라도 13분할이면
+        매달 받는 돈이 약 7.7% 줄어듭니다.</li>
+      <li><b>성과급은 받는 달에 세금이 몰립니다.</b> 그 달의 과세 급여가 커져 소득세가 크게 늘지만,
+        연말정산에서 최종 정산되므로 1년 전체로 보면 손해는 아닙니다.</li>
+    </ul>
+  </section>
+
+  <div class="ad-slot">
+    <!-- 애드센스 광고 단위 코드를 이 자리에 붙여넣으세요 -->
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <nav>
+      <a href="../">실수령액 계산기</a>
+      <a href="../annual-salary/">연봉 실수령액</a>
+      <a href="../four-insurance/">4대보험</a>
+      <a href="../severance-pay/">퇴직금</a>
+      <a href="./">실수령액표</a>
+      <a href="../guide/">가이드</a>
+      <a href="../about/">사이트 소개</a>
+      <a href="../privacy/">개인정보처리방침</a>
+      <a href="../terms/">이용약관</a>
+    </nav>
+    <p class="rate-stamp">적용 요율: <span class="js-rate-stamp"></span></p>
+    <p class="rate-stamp">© <span class="js-year"></span> 실수령액 계산기. 계산 결과는 참고용입니다.</p>
+  </div>
+</footer>
+
+<script src="../assets/js/rates.js?v=20260731"></script>
+<script src="../assets/data/withholding-2026.js?v=20260731"></script>
+<script src="../assets/js/calc.js?v=20260731"></script>
+<script src="../assets/js/ui.js?v=20260731"></script>
+<script>
+(function () {
+  var $ = UI.$, W = Calc.won;
+  var familyEl = $('#family'), stepEl = $('#step');
+  for (var i = 1; i <= 6; i++) familyEl.insertAdjacentHTML('beforeend', '<option value="' + i + '">' + i + '명</option>');
+
+  var FROM = 20000000, TO = 120000000;
+
+  function render() {
+    var step = Number(stepEl.value);
+    var family = Number(familyEl.value);
+    var html = '';
+    for (var a = FROM; a <= TO; a += step) {
+      var r = Calc.netSalary({
+        mode: 'annual', amount: a, severanceIncluded: false,
+        nonTaxable: 200000, family: family, children: 0, taxRatio: 1
+      });
+      html += '<tr>' +
+        '<td><a href="../annual-salary/?a=' + a + '&f=' + family + '">' + (a / 10000).toLocaleString('ko-KR') + '만원</a></td>' +
+        '<td class="num">' + W(r.monthlyGross) + '</td>' +
+        '<td class="num">' + W(r.insuranceTotal) + '</td>' +
+        '<td class="num">' + W(r.taxTotal) + '</td>' +
+        '<td class="num">' + W(r.deductionTotal) + '</td>' +
+        '<td class="num"><b>' + W(r.monthlyNet) + '</b></td>' +
+        '<td class="num">' + W(r.annualNet) + '</td>' +
+        '</tr>';
+    }
+    $('#tbl').querySelector('tbody').innerHTML = html;
+    UI.writeQuery({ f: family !== 1 ? family : '', s: step !== 2000000 ? step : '' });
+  }
+
+  familyEl.addEventListener('change', render);
+  stepEl.addEventListener('change', render);
+
+  var q = UI.readQuery();
+  if (q.f) familyEl.value = q.f;
+  if (q.s) stepEl.value = q.s;
+  render();
+})();
+</script>
+</body>
+</html>

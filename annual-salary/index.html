@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연봉 실수령액 계산기 2026 | 연봉으로 월 실수령액 계산</title>
+<meta name="description" content="연봉을 입력하면 2026년 4대보험 요율과 국세청 간이세액표를 적용해 월 실수령액과 연 실수령액을 바로 계산합니다. 퇴직금 포함 연봉(÷13)도 지원합니다.">
+<link rel="canonical" href="https://zooline88.github.io/salary/annual-salary/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="연봉 실수령액 계산기 2026">
+<meta property="og:description" content="연봉만 넣으면 월 실수령액이 바로 나옵니다. 2026년 요율·간이세액표 적용.">
+<meta property="og:url" content="https://zooline88.github.io/salary/annual-salary/">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#1a6fe8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css?v=20260731">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5521043113375613" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../">실수령액<span>계산기</span></a>
+    <nav class="site-nav">
+      <a href="../">실수령액</a>
+      <a href="./" aria-current="page">연봉</a>
+      <a href="../four-insurance/">4대보험</a>
+      <a href="../severance-pay/">퇴직금</a>
+      <a href="../salary-table/">실수령액표</a>
+      <a href="../guide/">가이드</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>연봉 실수령액 계산기</h1>
+  <p class="lead">
+    세전 연봉을 넣으면 매달 통장에 들어오는 금액을 계산합니다.
+    <span class="js-rate-stamp"></span> 요율과 국세청 근로소득 간이세액표를 적용합니다.
+  </p>
+
+  <section class="card">
+    <div class="field">
+      <label for="amount">연봉 (세전)</label>
+      <div class="money-input">
+        <input type="text" id="amount" inputmode="numeric" autocomplete="off" placeholder="0">
+        <span class="unit">원</span>
+      </div>
+      <div class="quick" id="quickBtns"></div>
+    </div>
+
+    <div class="field">
+      <span class="label">연봉에 퇴직금이</span>
+      <div class="seg">
+        <label><input type="radio" name="sev" value="0" checked><span>포함 안 됨 (÷12)</span></label>
+        <label><input type="radio" name="sev" value="1"><span>포함됨 (÷13)</span></label>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="field">
+        <label for="family">부양가족 수 <span class="hint">본인 포함</span></label>
+        <select id="family"></select>
+      </div>
+      <div class="field">
+        <label for="children">8~20세 자녀 수 <span class="hint">세액공제 대상</span></label>
+        <select id="children"></select>
+      </div>
+    </div>
+
+    <details class="adv" id="advBox">
+      <summary>비과세액·세부 설정</summary>
+      <div>
+        <div class="field">
+          <label for="nonTaxable">월 비과세액 <span class="hint">식대는 월 20만원까지 비과세입니다.</span></label>
+          <div class="money-input">
+            <input type="text" id="nonTaxable" inputmode="numeric" autocomplete="off" value="200,000">
+            <span class="unit">원</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="taxRatio">원천징수세액 조정비율</label>
+          <select id="taxRatio">
+            <option value="0.8">80%</option>
+            <option value="1" selected>100% (기본)</option>
+            <option value="1.2">120%</option>
+          </select>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section>
+    <div class="result-hero">
+      <div class="cap">월 실수령액</div>
+      <div class="big" id="netMonthly">0원</div>
+      <div class="sub" id="netSub">연 실수령액 0원</div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">공제 내역 (월 기준)</h2>
+      <div id="breakdown"></div>
+      <table class="kv" style="margin-top:14px">
+        <tbody>
+          <tr><th>세전 연봉</th><td class="num" id="grossAnnual">0원</td></tr>
+          <tr><th>세전 월급여</th><td class="num" id="grossMonthly">0원</td></tr>
+          <tr><th>과세대상 급여 <span class="sub-label">비과세액 제외</span></th><td class="num" id="taxableMonthly">0원</td></tr>
+          <tr class="total"><th>월 실수령액</th><td class="num" id="netMonthly2">0원</td></tr>
+        </tbody>
+      </table>
+      <div class="actions">
+        <button class="btn primary" id="shareBtn" type="button">결과 주소 복사</button>
+        <a class="btn" href="../salary-table/">연봉별 실수령액표 보기</a>
+      </div>
+      <p class="disclaimer" id="shareMsg" aria-live="polite"></p>
+      <div class="note" id="calcNote"></div>
+      <p class="disclaimer">본 계산기는 참고용이며 실제 원천징수액과 다를 수 있습니다.</p>
+    </div>
+  </section>
+
+  <div class="ad-slot">
+    <!-- 애드센스 광고 단위 코드를 이 자리에 붙여넣으세요 -->
+  </div>
+
+  <section class="prose">
+    <h2>연봉에서 월급을 구하는 방법</h2>
+    <p>
+      연봉 계약은 크게 두 가지입니다. <b>퇴직금이 별도</b>인 계약이면 연봉을 12로 나눈 금액이 월급입니다.
+      반면 <b>퇴직금이 연봉에 포함</b>된 계약(13분할)이면 연봉을 13으로 나눠야 실제 월급이 되고,
+      나머지 한 달치가 퇴직할 때 퇴직금으로 정산됩니다.
+      같은 연봉 5,000만원이라도 12분할이면 월 약 416만원, 13분할이면 월 약 384만원으로 차이가 큽니다.
+    </p>
+    <p>
+      상여금이나 성과급이 연봉에 포함되어 있다면, 실제로는 매달 균등하게 나오지 않고
+      지급되는 달에 몰려 나옵니다. 상여금이 나오는 달은 그 달의 과세대상 급여가 커져
+      소득세도 함께 늘어나므로, 이 계산기의 결과는 <b>상여금이 없는 평달 기준</b>으로 보시면 됩니다.
+    </p>
+
+    <h2>연봉이 오르면 실수령액은 얼마나 오르나요?</h2>
+    <p>
+      소득세는 소득이 많을수록 세율이 높아지는 <b>누진 구조</b>라, 연봉 인상분이 그대로
+      실수령액 인상분이 되지는 않습니다. 예를 들어 연봉 3,000만원대에서는 공제율이 약 10% 안팎이지만
+      연봉 8,000만원대에서는 20%를 넘어섭니다. 다만 국민연금은 <b>상한액(월 659만원)</b>이 있어서
+      그 이상 벌어도 보험료가 더 늘지 않으므로, 고연봉 구간에서는 공제율 상승폭이 다소 완만해집니다.
+    </p>
+    <p>
+      연봉 구간별로 실수령액이 어떻게 달라지는지는
+      <a href="../salary-table/">2026 연봉 실수령액표</a>에서 한눈에 확인할 수 있습니다.
+    </p>
+  </section>
+
+  <div class="ad-slot">
+    <!-- 애드센스 광고 단위 코드를 이 자리에 붙여넣으세요 -->
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <nav>
+      <a href="../">실수령액 계산기</a>
+      <a href="./">연봉 실수령액</a>
+      <a href="../four-insurance/">4대보험</a>
+      <a href="../severance-pay/">퇴직금</a>
+      <a href="../salary-table/">실수령액표</a>
+      <a href="../guide/">가이드</a>
+      <a href="../about/">사이트 소개</a>
+      <a href="../privacy/">개인정보처리방침</a>
+      <a href="../terms/">이용약관</a>
+    </nav>
+    <p class="rate-stamp">적용 요율: <span class="js-rate-stamp"></span></p>
+    <p class="rate-stamp">© <span class="js-year"></span> 실수령액 계산기. 계산 결과는 참고용입니다.</p>
+  </div>
+</footer>
+
+<script src="../assets/js/rates.js?v=20260731"></script>
+<script src="../assets/data/withholding-2026.js?v=20260731"></script>
+<script src="../assets/js/calc.js?v=20260731"></script>
+<script src="../assets/js/ui.js?v=20260731"></script>
+<script>
+(function () {
+  var $ = UI.$;
+  var amountEl = $('#amount'), nonTaxEl = $('#nonTaxable');
+  var familyEl = $('#family'), childrenEl = $('#children'), taxRatioEl = $('#taxRatio');
+  var advBox = $('#advBox');
+
+  for (var i = 1; i <= 11; i++) familyEl.insertAdjacentHTML('beforeend', '<option value="' + i + '">' + i + '명</option>');
+  for (var j = 0; j <= 6; j++) childrenEl.insertAdjacentHTML('beforeend', '<option value="' + j + '">' + j + '명</option>');
+
+  $('#quickBtns').innerHTML = [30000000, 40000000, 50000000, 60000000, 80000000, 100000000]
+    .map(function (v) { return '<button type="button" data-v="' + v + '">' + (v / 10000000) + '천만원</button>'; }).join('');
+  $('#quickBtns').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-v]');
+    if (!b) return;
+    amountEl.value = Number(b.dataset.v).toLocaleString('ko-KR');
+    update();
+  });
+
+  function sevIncluded() { return $('input[name="sev"]:checked').value === '1'; }
+
+  function update() {
+    var r = Calc.netSalary({
+      mode: 'annual',
+      amount: Calc.parseWon(amountEl.value),
+      severanceIncluded: sevIncluded(),
+      nonTaxable: Calc.parseWon(nonTaxEl.value),
+      family: Number(familyEl.value),
+      children: Number(childrenEl.value),
+      taxRatio: Number(taxRatioEl.value)
+    });
+
+    $('#netMonthly').textContent = Calc.won(r.monthlyNet) + '원';
+    $('#netMonthly2').textContent = Calc.won(r.monthlyNet) + '원';
+    $('#netSub').textContent = '연 실수령액 ' + Calc.won(r.annualNet) + '원' +
+      (r.monthlyGross > 0 ? ' · 공제율 ' + (r.deductionRate * 100).toFixed(1) + '%' : '');
+    $('#grossAnnual').textContent = Calc.won(r.annualGross) + '원';
+    $('#grossMonthly').textContent = Calc.won(r.monthlyGross) + '원';
+    $('#taxableMonthly').textContent = Calc.won(r.taxable) + '원';
+    UI.renderBreakdown($('#breakdown'), r);
+
+    var notes = ['연봉 ' + Calc.won(r.annualGross) + '원 ÷ ' + (sevIncluded() ? '13' : '12') +
+      '개월 = 월 ' + Calc.won(r.monthlyGross) + '원으로 계산했습니다.'];
+    if (r.pensionCapped) notes.push('국민연금은 상한액(월 659만원) 기준으로 계산했습니다.');
+    if (r.children > 0) notes.push('8~20세 자녀 ' + r.children + '명 세액공제 ' + Calc.won(Calc.childTaxCredit(r.children)) + '원 차감.');
+    $('#calcNote').innerHTML = notes.map(function (n) { return '· ' + n; }).join('<br>');
+
+    UI.writeQuery({
+      a: Calc.parseWon(amountEl.value) || '',
+      n: Calc.parseWon(nonTaxEl.value),
+      f: familyEl.value, c: childrenEl.value,
+      r: taxRatioEl.value !== '1' ? taxRatioEl.value : '',
+      s: sevIncluded() ? '1' : ''
+    });
+  }
+
+  var debounced = UI.debounce(update, 250);
+  UI.attachMoneyInput(amountEl, debounced);
+  UI.attachMoneyInput(nonTaxEl, debounced);
+  [familyEl, childrenEl, taxRatioEl].forEach(function (el) { el.addEventListener('change', update); });
+  UI.$$('input[name="sev"]').forEach(function (el) { el.addEventListener('change', update); });
+  UI.attachShare($('#shareBtn'), $('#shareMsg'));
+
+  var q = UI.readQuery();
+  if (q.s === '1') $('input[name="sev"][value="1"]').checked = true;
+  amountEl.value = Number(q.a || 40000000).toLocaleString('ko-KR');
+  if (q.n !== undefined && q.n !== '') { nonTaxEl.value = Number(q.n).toLocaleString('ko-KR'); if (Number(q.n) !== 200000) advBox.open = true; }
+  if (q.f) familyEl.value = q.f;
+  if (q.c) childrenEl.value = q.c;
+  if (q.r) { taxRatioEl.value = q.r; advBox.open = true; }
+  update();
+})();
+</script>
+</body>
+</html>

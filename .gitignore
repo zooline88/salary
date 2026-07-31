@@ -1,0 +1,11 @@
+# 윈도우가 자동으로 만드는 파일
+Thumbs.db
+desktop.ini
+*.lnk
+
+# 개발용 설정(내 PC 전용)
+.claude/
+
+# 파이썬 임시물
+__pycache__/
+*.pyc
